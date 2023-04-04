@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% load embed_video_tags %}
+
+{% block content %}
+    <div class="post">
+        {% if post.published_date %}
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+        {% endif %}
+    {% if user.is_authenticated %}
+        <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+    {% endif %}
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.text|linebreaksbr }}</p></div>
+    {% if post.image  %}
+        <img class="image" src="{{ post.image.url}}"/>
+    {% endif %}
+
+    {% video post.video as youtube %}
+    <iframe width="640" height="360" src="{{ youtube.url }}&autoplay=1&mute=1" allow="autoplay" frameborder="0"></iframe>
+    {% endvideo %}
+
+{% endblock %}
