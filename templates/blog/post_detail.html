@@ -22,10 +22,10 @@
 {#        {% video post.video as youtube %}#}
 {#        <iframe width="640" height="360" src="{{ youtube.url }}&autoplay=1&mute=1" frameborder="0"></iframe>#}
 {#        {% endvideo %}#}
-
-
+    {% if post.video %}
+<div class="iframe-container">
     <div id="player"></div><!-- 실제로 영상이 나올 부분 -->
-
+</div>
 <!-- 아래 코드가 실행되면 player div 위에 iframe 이 덮입혀짐 -->
 
 
@@ -40,7 +40,7 @@
 
     player = new YT.Player('player',{
 
-      width:'100%',
+      width:'640', height:'390',
 
       videoId:videoid,
 
@@ -74,4 +74,5 @@ function youtube_parser(url){
     return (match&&match[7].length==11)? match[7] : false;
 }
 </script>
+    {% endif %}
 {% endblock %}
